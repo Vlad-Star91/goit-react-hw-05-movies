@@ -20,7 +20,6 @@ export default function Reviews() {
 
   return (
     <div>
-      {error && error.message}
       {movie && (
         <ul>
           {movie.map(({ id, author, content }) => (

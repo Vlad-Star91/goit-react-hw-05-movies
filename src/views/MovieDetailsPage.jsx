@@ -13,7 +13,6 @@ const Cast = lazy(() => import('./Cast'));
 const Reviews = lazy(() => import('./Reviews'));
 
 export default function MovieDetailsPage() {
-  // const { path, url } = useMatch();
   const { movieId } = useParams();
   const [movie, setMovie] = useState();
   let releaseYear = null;
@@ -28,15 +27,11 @@ export default function MovieDetailsPage() {
   if (movie) {
     releaseYear = movie.release_date.slice(0, 4);
   }
-
-  let navigate = useNavigate();
-
-  let location = useLocation();
-
-  // const currentRef = useRef(location.state.from.location).current;
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const onGoBackClick = () => {
-    navigate(-1);
+    location.state ? navigate(location.state.from) : navigate('/');
   };
 
   return (
