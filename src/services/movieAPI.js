@@ -1,5 +1,3 @@
-// 7370b438f0d870869e4860048fabe102
-// https://api.themoviedb.org/3/movie/550?api_key=7370b438f0d870869e4860048fabe102
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = '7370b438f0d870869e4860048fabe102';
 

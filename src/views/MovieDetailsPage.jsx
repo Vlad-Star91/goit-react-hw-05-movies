@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense, lazy, useRef } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import {
   useParams,
@@ -14,13 +14,14 @@ const Reviews = lazy(() => import('./Reviews'));
 
 export default function MovieDetailsPage() {
   // const { path, url } = useMatch();
-  const { movieId } = useParams(null);
+  const { movieId } = useParams();
   const [movie, setMovie] = useState();
   let releaseYear = null;
 
   useEffect(() => {
-    movieAPI.fetchMovieById(movieId).then(response => {
-      setMovie(response.data);
+    movieAPI.fetchMovieById(movieId).then(data => {
+      const movies = data;
+      setMovie(movies);
     });
   }, [movieId]);
 
@@ -28,14 +29,14 @@ export default function MovieDetailsPage() {
     releaseYear = movie.release_date.slice(0, 4);
   }
 
-  const navigate = useNavigate();
+  let navigate = useNavigate();
 
-  const location = useLocation();
+  let location = useLocation();
 
-  const currentRef = useRef(location.state?.from?.location).current;
+  // const currentRef = useRef(location.state.from.location).current;
 
   const onGoBackClick = () => {
-    navigate.push(currentRef ?? `/`);
+    navigate(-1);
   };
 
   return (

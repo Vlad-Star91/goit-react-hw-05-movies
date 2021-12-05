@@ -1,7 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AppBar from './components/AppBar/AppBar.jsx';
-// import Navigation from './components/Navigation/Navigation.jsx';
 import Container from './components/Container/Container.jsx';
 
 const HomePage = lazy(() => import('./views/HomePage.jsx'));
@@ -16,7 +15,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/movies" element={<MoviesPage />} />
-          <Route path="/movies/:movieId" element={<MovieDetailsPage />} />
+          <Route path="/movies/:movieId/*" element={<MovieDetailsPage />} />
           <Route path="*" element={<Navigate replace to="/" />} />
         </Routes>
       </Suspense>
