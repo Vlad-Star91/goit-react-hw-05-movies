@@ -17,14 +17,16 @@ export default function MoviesPage() {
       return;
     }
 
-    movieAPI.fetchSearchMovies(searchQuery).then(({ results }) => {
-      if (results.length === 0) {
-        alert(`Not match for request ${searchQuery}`);
-        return;
-      }
-
-      setMovies(results);
-    });
+    movieAPI
+      .fetchSearchMovies(searchQuery)
+      .then(({ results }) => {
+        if (results.length === 0) {
+          alert(`Not match for request ${searchQuery}`);
+          return;
+        }
+        setMovies(results);
+      })
+      .catch(new Error('Error message'));
   }, [searchQuery]);
 
   const onInputChange = event => {

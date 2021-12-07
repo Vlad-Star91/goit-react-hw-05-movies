@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import * as movieAPI from '../services/movieAPI';
+import * as movieAPI from '../../services/movieAPI';
 
 export default function Cast() {
   const { movieId } = useParams(null);
   const [cast, setCast] = useState();
 
   useEffect(() => {
-    movieAPI.fetchMovieCredits(movieId).then(({ cast }) => {
-      setCast(cast);
-    });
+    movieAPI
+      .fetchMovieCredits(movieId)
+      .then(({ cast }) => {
+        setCast(cast);
+      })
+      .catch(new Error('Error message'));
   }, [movieId]);
   const imgurl = 'https://image.tmdb.org/t/p/w300';
   return (

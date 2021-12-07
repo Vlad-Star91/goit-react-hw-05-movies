@@ -9,8 +9,8 @@ import {
 } from 'react-router';
 import * as movieAPI from '../services/movieAPI';
 
-const Cast = lazy(() => import('./Cast'));
-const Reviews = lazy(() => import('./Reviews'));
+const Cast = lazy(() => import('../components/Cast/Cast'));
+const Reviews = lazy(() => import('../components/Reviews/Reviews'));
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
@@ -18,10 +18,13 @@ export default function MovieDetailsPage() {
   let releaseYear = null;
 
   useEffect(() => {
-    movieAPI.fetchMovieById(movieId).then(data => {
-      const movies = data;
-      setMovie(movies);
-    });
+    movieAPI
+      .fetchMovieById(movieId)
+      .then(data => {
+        const movies = data;
+        setMovie(movies);
+      })
+      .catch(new Error('Error message'));
   }, [movieId]);
 
   if (movie) {
